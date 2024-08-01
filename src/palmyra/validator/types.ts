@@ -10,10 +10,10 @@ interface ILengthOptions {
 interface IRangeOptions<T> {
     start?: T,
     end?: T,
-    negate: boolean
+    negate?: boolean
 }
 
-type Predicator = (v: string) => PredicateResponse;
+type Predicator = (v: string | number) => PredicateResponse;
 type PredicateGen = (...args: any[]) => Predicator;
 
 interface IValidatorOptions {
@@ -31,4 +31,4 @@ interface PredicateResponse {
     value?: any
 }
 
-export type { IValidatorOptions, ILengthOptions, PredicateResponse, PredicateGen, Predicator }
+export type { IValidatorOptions, ILengthOptions, PredicateResponse, PredicateGen, Predicator, IRangeOptions }

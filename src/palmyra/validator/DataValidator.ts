@@ -1,4 +1,5 @@
 import { getLengthValidator } from "./builder/LengthPredicateBuilder";
+import { getRangeValidator } from "./builder/RangePredicateBuilder";
 import { getRulePredicator } from "./builder/RulePredicateBuilder";
 import { IValidatorOptions, PredicateResponse, Predicator } from "./types";
 
@@ -12,6 +13,10 @@ const getPredicate = (options: IValidatorOptions) => {
 
     if (options.length) {
         validators.push(getLengthValidator(options.length));
+    }
+
+    if (options.range) {
+        validators.push(getRangeValidator(options.range));
     }
 
     if (options.rules) {
