@@ -1,5 +1,4 @@
 
-
 const hasLowerCase = (val: any) => {
     const regex = /^(.*[a-z].*)$/;
     return regex.test(val);
@@ -24,3 +23,5 @@ const hasSpecialChar = (val: any) => {
     const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     return specialChars.test(val);
 }
+
+export { hasLowerCase, hasSpecialChar, isFolder, isPortRange, hasUpperCase }

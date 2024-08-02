@@ -1,6 +1,6 @@
 import validator, { isFloat, isNumeric } from 'validator';
-import { noopPredicate } from '../predicate/SimplePredicates';
 import { PredicateGen, PredicateResponse } from '../types';
+import { hasLowerCase, hasSpecialChar, hasUpperCase, isFolder, isPortRange, noopPredicate } from '../predicate';
 
 
 const getRulePredicator: PredicateGen = (rule: string) => {

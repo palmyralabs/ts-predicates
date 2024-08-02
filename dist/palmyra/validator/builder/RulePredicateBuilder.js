@@ -1,12 +1,13 @@
-import { v as s, a as e, n as t } from "../../../chunks/SimplePredicates.js";
-const c = (r) => {
-  const i = n(r);
+import { v as s, d as e, n as t } from "../../../chunks/SimplePredicates.js";
+import { hasSpecialChar as n, hasUpperCase as o, hasLowerCase as c, isPortRange as u, isFolder as l } from "../predicate/RegexPredicates.js";
+const m = (r) => {
+  const i = p(r);
   return (a) => i(a) ? { valid: !0 } : {
     valid: !1,
     reason: r,
     value: a
   };
-}, n = (r) => {
+}, p = (r) => {
   if (r)
     switch (r) {
       case "string":
@@ -30,22 +31,22 @@ const c = (r) => {
       case "fqdn":
         return e.isFQDN;
       case "folder":
-        return isFolder;
+        return l;
       case "portrange":
-        return isPortRange;
+        return u;
       case "password":
         return e.isStrongPassword;
       case "hasLowerCase":
-        return hasLowerCase;
+        return c;
       case "hasUpperCase":
-        return hasUpperCase;
+        return o;
       case "hasSpecialChar":
-        return hasSpecialChar;
+        return n;
       case "float":
         return s.isFloat;
     }
   return t;
 };
 export {
-  c as getRulePredicator
+  m as getRulePredicator
 };

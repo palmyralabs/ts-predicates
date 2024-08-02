@@ -20,8 +20,8 @@ export default defineConfig({
     },
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
-      name: 'PalmyraTsUtils',
-      fileName: 'palmyra-ts-utils',
+      name: 'PalmyraTsPredicates',
+      fileName: 'palmyra-ts-predicates',
       formats: ['es']
     },
     rollupOptions: {

@@ -29,14 +29,24 @@ test('length minimum-failure-Less', () => {
     expect(v('hello')).toEqual({ valid: false, reason: "length.min", value: 5 });
 })
 
-test('length minimum-failure-undefined', () => {
+test('input-undefined', () => {
     const v = getPredicate({ length: { min: 8 } });
-    expect(v(undefined)).toEqual({ valid: false, reason: "length.invalid", value: undefined });
+    expect(v(undefined)).toEqual({ valid: true });
 })
 
-test('length minimum-failure-undefined', () => {
+test('input-null', () => {
     const v = getPredicate({ length: { min: 8 } });
-    expect(v(null)).toEqual({ valid: false, reason: "length.invalid", value: null });
+    expect(v(null)).toEqual({ valid: true });
+})
+
+test('input-required-undefined', () => {
+    const v = getPredicate({ length: { min: 8 }, required:true });
+    expect(v(undefined)).toEqual({ valid: false, reason: "required", value: undefined });
+})
+
+test('input-required-null', () => {
+    const v = getPredicate({ length: { min: 8 }, required:true });
+    expect(v(null)).toEqual({ valid: false, reason: "required", value: null });
 })
 
 test('length minimum-success-greater', () => {

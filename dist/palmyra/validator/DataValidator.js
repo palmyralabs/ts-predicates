@@ -1,28 +1,32 @@
 import { getLengthValidator as g } from "./builder/LengthPredicateBuilder.js";
-import { getRangeValidator as i } from "./builder/RangePredicateBuilder.js";
-import { getRegexPredictor as d } from "./builder/RegexPredicateBuilder.js";
-import { getRulePredicator as u } from "./builder/RulePredicateBuilder.js";
-const m = (r) => {
-  let e = [];
-  if (r.required == !0 && e.push(), r.length && e.push(g(r.length)), r.range && e.push(i(r.range)), r.regExp && e.push(d(r.regExp)), r.rules) {
-    const t = r.rules;
-    if (t instanceof Array && t.length > 0)
-      for (var f of t)
-        e.push(u(f));
+import { getRangeValidator as d } from "./builder/RangePredicateBuilder.js";
+import { getRegexPredictor as s } from "./builder/RegexPredicateBuilder.js";
+import { getRulePredicator as l } from "./builder/RulePredicateBuilder.js";
+import { i as n } from "../../chunks/SimplePredicates.js";
+const v = (r) => {
+  let t = [];
+  const u = r.required;
+  if (r.length && t.push(g(r.length)), r.range && t.push(d(r.range)), r.regExp && t.push(s(r.regExp)), r.rules) {
+    const e = r.rules;
+    if (e instanceof Array && e.length > 0)
+      for (var f of e)
+        t.push(l(f));
     else {
-      const a = t;
-      e.push(u(a));
+      const a = e;
+      t.push(l(a));
     }
   }
-  return (t) => {
-    for (var a of e) {
-      const l = a.call(null, t);
-      if (!l.valid)
-        return l;
+  return (e) => {
+    if (n(e))
+      return u ? { valid: !1, reason: "required", value: e } : { valid: !0 };
+    for (var a of t) {
+      const i = a.call(null, e);
+      if (!i.valid)
+        return i;
     }
     return { valid: !0 };
   };
 };
 export {
-  m as getPredicate
+  v as getPredicate
 };

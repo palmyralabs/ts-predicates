@@ -1,7 +1,6 @@
-import { BiPredicate, IPredicate } from "@palmyralabs/ts-utils";
 import validator from "validator";
 
-const isEmpty: IPredicate<any> = (data: any) => {
+const isEmpty = (data: any) => {
     if (null == data || undefined == data)
         return true;
     if (typeof (data) == 'string') {
@@ -9,14 +8,24 @@ const isEmpty: IPredicate<any> = (data: any) => {
     }
     if (isNaN(data))
         return true;
+
+    if (data instanceof Array) {
+        return data.length == 0;
+    }
+
+    if (typeof data == 'object') {
+        return Object.keys(data).length == 0;
+    }
+
     return false;
 }
 
-const isPresent: IPredicate<any> = (d: any) => {
+
+const isPresent = (d: any) => {
     return !isEmpty(d);
 }
 
-const hasValue: BiPredicate<any, string> = (d: any, key: string) => {
+const hasValue = (d: any, key: string) => {
     const k: string = Object.keys(d).find((k: string) => {
         return k == key;
     });

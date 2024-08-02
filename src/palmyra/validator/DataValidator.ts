@@ -2,15 +2,12 @@ import { getLengthValidator } from "./builder/LengthPredicateBuilder";
 import { getRangeValidator } from "./builder/RangePredicateBuilder";
 import { getRegexPredictor } from "./builder/RegexPredicateBuilder";
 import { getRulePredicator } from "./builder/RulePredicateBuilder";
+import { isEmpty } from "./predicate/SimplePredicates";
 import { IValidatorOptions, PredicateResponse, Predicator } from "./types";
 
 const getPredicate = (options: IValidatorOptions) => {
     let validators: Array<Predicator> = [];
-    // let required = options.required;
-
-    if (options.required == true) {
-        validators.push();
-    }
+    const required = options.required;
 
     if (options.length) {
         validators.push(getLengthValidator(options.length));
@@ -37,6 +34,10 @@ const getPredicate = (options: IValidatorOptions) => {
     }
 
     return (value: any): PredicateResponse => {
+        if (isEmpty(value)) {
+            return required ? { valid: false, reason: "required", value } : { valid: true }
+        }
+
         for (var validator of validators) {
             const validStatus: PredicateResponse = validator.call(null, value);
             if (!validStatus.valid)
