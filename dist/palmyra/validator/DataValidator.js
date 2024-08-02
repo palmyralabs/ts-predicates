@@ -1,26 +1,28 @@
-import { getLengthValidator as i } from "./builder/LengthPredicateBuilder.js";
-import { getRulePredicator as a } from "./builder/RulePredicateBuilder.js";
-const o = (e) => {
-  let t = [];
-  if (e.required == !0 && t.push(), e.length && t.push(i(e.length)), e.rules) {
-    const r = e.rules;
-    if (r instanceof Array && r.length > 0)
-      for (var f of r)
-        t.push(a(f));
+import { getLengthValidator as g } from "./builder/LengthPredicateBuilder.js";
+import { getRangeValidator as i } from "./builder/RangePredicateBuilder.js";
+import { getRegexPredictor as d } from "./builder/RegexPredicateBuilder.js";
+import { getRulePredicator as u } from "./builder/RulePredicateBuilder.js";
+const m = (r) => {
+  let e = [];
+  if (r.required == !0 && e.push(), r.length && e.push(g(r.length)), r.range && e.push(i(r.range)), r.regExp && e.push(d(r.regExp)), r.rules) {
+    const t = r.rules;
+    if (t instanceof Array && t.length > 0)
+      for (var f of t)
+        e.push(u(f));
     else {
-      const l = r;
-      t.push(a(l));
+      const a = t;
+      e.push(u(a));
     }
   }
-  return (r) => {
-    for (var l of t) {
-      const u = l.call(null, r);
-      if (!u.valid)
-        return u;
+  return (t) => {
+    for (var a of e) {
+      const l = a.call(null, t);
+      if (!l.valid)
+        return l;
     }
     return { valid: !0 };
   };
 };
 export {
-  o as getPredicate
+  m as getPredicate
 };
