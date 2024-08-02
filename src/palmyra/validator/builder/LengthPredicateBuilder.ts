@@ -25,6 +25,8 @@ const getLengthValidator = (o: ILengthOptions): Predicator => {
 
 const getRangeLengthValidator: PredicateGen = (minLength: number, maxLength: number) => {
     return (val: string) => {
+        if(invalidInput(val))
+            return { valid: false, reason: 'length.invalid', value: val };
         if (val.length <= maxLength) {
             if (minLength <= val.length) {
                 return { valid: true };
@@ -39,6 +41,9 @@ const getRangeLengthValidator: PredicateGen = (minLength: number, maxLength: num
 
 const getEqLengthValidator: PredicateGen = (length: number) => {
     return (val: string): PredicateResponse => {
+        if(invalidInput(val))
+            return { valid: false, reason: 'length.invalid', value: val };
+
         if (val.length == length) {
             return { valid: true };
         } else {
@@ -49,6 +54,9 @@ const getEqLengthValidator: PredicateGen = (length: number) => {
 
 const getMinLengthValidator: PredicateGen = (minLength: number) => {
     return (val: string) => {
+        if(invalidInput(val))
+            return { valid: false, reason: 'length.invalid', value: val };
+
         if (minLength <= val.length) {
             return { valid: true };
         } else {
@@ -59,12 +67,19 @@ const getMinLengthValidator: PredicateGen = (minLength: number) => {
 
 const getMaxLengthValidator: PredicateGen = (maxLength: number) => {
     return (val: string) => {
+        if(invalidInput(val))
+            return { valid: false, reason: 'length.invalid', value: val };
+        
         if (val.length <= maxLength) {
             return { valid: true };
         } else {
             return { valid: false, reason: 'length.max', value: val.length };
         }
     }
+}
+
+const invalidInput = (v: string) => {
+    return (null == v || undefined == v);
 }
 
 export { getLengthValidator }

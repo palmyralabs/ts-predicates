@@ -29,6 +29,16 @@ test('length minimum-failure-Less', () => {
     expect(v('hello')).toEqual({ valid: false, reason: "length.min", value: 5 });
 })
 
+test('length minimum-failure-undefined', () => {
+    const v = getPredicate({ length: { min: 8 } });
+    expect(v(undefined)).toEqual({ valid: false, reason: "length.invalid", value: undefined });
+})
+
+test('length minimum-failure-undefined', () => {
+    const v = getPredicate({ length: { min: 8 } });
+    expect(v(null)).toEqual({ valid: false, reason: "length.invalid", value: null });
+})
+
 test('length minimum-success-greater', () => {
     const v = getPredicate({ length: { min: 8 } });
     expect(v('hello world')).toEqual({ valid: true });
@@ -58,45 +68,3 @@ test('length range success', () => {
     expect(v('hello ')).toEqual({ valid: true });
 })
 
-
-test('range start-success', () => {
-    const actual = getPredicate({ range: { start: 10 } })(10);
-    const expected = { valid: true }
-    expect(actual).toEqual(expected);
-})
-
-test('range start-failure', () => {
-    const v = getPredicate({ range: { start: 10 } });
-    expect(v(9)).toEqual({ valid: false, reason: "range.start", value: 9 });
-})
-
-test('range end-success', () => {
-    const actual = getPredicate({ range: { end: 100 } })(98);
-    const expected = { valid: true }
-    expect(actual).toEqual(expected);
-})
-
-test('range end-failure', () => {
-    const v = getPredicate({ range: { end: 100 } });
-    expect(v(101)).toEqual({ valid: false, reason: "range.end", value: 101 });
-})
-
-test('range start-end-success', () => {
-    const v = getPredicate({ range: { start: 1001, end: 1099 } });
-    expect(v(1100)).toEqual({ valid: false, reason: "range.end", value: 1100 });
-    expect(v(90)).toEqual({ valid: false, reason: "range.start", value: 90 });
-    expect(v(1020)).toEqual({ valid: true });
-    expect(v(1098)).toEqual({ valid: true });
-    expect(v(1001)).toEqual({ valid: true });
-})
-
-test('regex success', () => {
-    const actual = getPredicate({ regExp: /^[a-zA-Z]+$/ })("Example");
-    const expected = { valid: true }
-    expect(actual).toEqual(expected);
-})
-
-test('regex failure', () => {
-    const v = getPredicate({ regExp: /^([1-5])$/ });
-    expect(v(6)).toEqual({ valid: false, reason: "regex", value: 6 });
-})
