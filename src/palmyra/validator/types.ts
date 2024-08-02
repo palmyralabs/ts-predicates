@@ -20,7 +20,7 @@ interface IValidatorOptions {
     required?: boolean,
     range?: IRangeOptions<number>,
     length?: ILengthOptions,
-    regExp?: string,
+    regExp?: RegExp,
     //validFn?: IFunction<any, { result: boolean, status: string }>
     rules?: string[]
 }
