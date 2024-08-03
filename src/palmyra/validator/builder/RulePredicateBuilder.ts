@@ -3,7 +3,30 @@ import { PredicateGen, PredicateResponse } from '../types';
 import { hasLowerCase, hasSpecialChar, hasUpperCase, isFolder, isPortRange, noopPredicate } from '../predicate';
 
 
-const getRulePredicator: PredicateGen = (rule: string) => {
+const ruleValidators = {
+    'string': noopPredicate,
+    'alphabets': validator.isAlpha,
+    'date': validator.isDate,
+    'time': validator.isTime,
+    'number': isNumeric,
+    'email': validator.isEmail,
+    'port': validator.isPort,
+    'ip': validator.isIP,
+    'fqdn': validator.isFQDN,
+    'folder': isFolder,
+    'portRange': isPortRange,
+    'password': validator.isStrongPassword,
+    'hasLowerCase': hasLowerCase,
+    'hasUpperCase': hasUpperCase,
+    'hasSpecialChar': hasSpecialChar,
+    'float': isFloat
+}
+
+
+type validationRule = keyof typeof ruleValidators;
+
+
+const getRulePredicator: PredicateGen = (rule: validationRule) => {
     const validator = getRuleValidator(rule);
 
     return (d: any): PredicateResponse => {
@@ -18,46 +41,16 @@ const getRulePredicator: PredicateGen = (rule: string) => {
 }
 
 
-const getRuleValidator = (rule: string) => {
+const getRuleValidator = (rule: validationRule) => {
     if (rule) {
-        switch (rule) {
-            case 'string':
-                return noopPredicate;
-            case 'alphabets':
-                return validator.isAlpha;
-            case 'date':
-                return validator.isDate;
-            case 'time':
-                return validator.isTime;
-            case 'number':
-                return isNumeric;
-            case 'email':
-                return validator.isEmail;
-            case 'mobilePhone':
-                return validator.isMobilePhone;
-            case 'port':
-                return validator.isPort;
-            case 'ip':
-                return validator.isIP;
-            case 'fqdn':
-                return validator.isFQDN;
-            case 'folder':
-                return isFolder;
-            case 'portrange':
-                return isPortRange;
-            case 'password':
-                return validator.isStrongPassword;
-            case 'hasLowerCase':
-                return hasLowerCase;
-            case 'hasUpperCase':
-                return hasUpperCase;
-            case 'hasSpecialChar':
-                return hasSpecialChar;
-            case 'float':
-                return isFloat;
-        }
+        const validator = ruleValidators[rule];
+        if (!validator)
+            throw new Error('no validator found for rule ' + rule);
+        return validator ? validator : noopPredicate;
     }
     return noopPredicate;
 }
 
 export { getRulePredicator }
+
+export type { validationRule }

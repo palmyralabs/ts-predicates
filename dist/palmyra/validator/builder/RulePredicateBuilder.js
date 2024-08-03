@@ -1,51 +1,37 @@
-import { v as s, d as e, n as t } from "../../../chunks/SimplePredicates.js";
-import { hasSpecialChar as n, hasUpperCase as o, hasLowerCase as c, isPortRange as u, isFolder as l } from "../predicate/RegexPredicates.js";
-const m = (r) => {
-  const i = p(r);
-  return (a) => i(a) ? { valid: !0 } : {
+import { n as s, v as a, d as t } from "../../../chunks/SimplePredicates.js";
+import { isFolder as i, isPortRange as l, hasLowerCase as n, hasUpperCase as d, hasSpecialChar as p } from "../predicate/RegexPredicates.js";
+const f = {
+  string: s,
+  alphabets: a.isAlpha,
+  date: a.isDate,
+  time: a.isTime,
+  number: t.isNumeric,
+  email: a.isEmail,
+  port: a.isPort,
+  ip: a.isIP,
+  fqdn: a.isFQDN,
+  folder: i,
+  portRange: l,
+  password: a.isStrongPassword,
+  hasLowerCase: n,
+  hasUpperCase: d,
+  hasSpecialChar: p,
+  float: t.isFloat
+}, m = (r) => {
+  const e = h(r);
+  return (o) => e(o) ? { valid: !0 } : {
     valid: !1,
     reason: r,
-    value: a
+    value: o
   };
-}, p = (r) => {
-  if (r)
-    switch (r) {
-      case "string":
-        return t;
-      case "alphabets":
-        return e.isAlpha;
-      case "date":
-        return e.isDate;
-      case "time":
-        return e.isTime;
-      case "number":
-        return s.isNumeric;
-      case "email":
-        return e.isEmail;
-      case "mobilePhone":
-        return e.isMobilePhone;
-      case "port":
-        return e.isPort;
-      case "ip":
-        return e.isIP;
-      case "fqdn":
-        return e.isFQDN;
-      case "folder":
-        return l;
-      case "portrange":
-        return u;
-      case "password":
-        return e.isStrongPassword;
-      case "hasLowerCase":
-        return c;
-      case "hasUpperCase":
-        return o;
-      case "hasSpecialChar":
-        return n;
-      case "float":
-        return s.isFloat;
-    }
-  return t;
+}, h = (r) => {
+  if (r) {
+    const e = f[r];
+    if (!e)
+      throw new Error("no validator found for rule " + r);
+    return e || s;
+  }
+  return s;
 };
 export {
   m as getRulePredicator

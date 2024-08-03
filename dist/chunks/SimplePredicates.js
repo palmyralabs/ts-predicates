@@ -4494,9 +4494,9 @@ export {
   Ei as a,
   xi as b,
   Li as c,
-  xa as d,
+  Ri as d,
   Di as h,
   La as i,
   Ci as n,
-  Ri as v
+  xa as v
 };

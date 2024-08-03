@@ -1,11 +1,17 @@
-const a = (e) => {
-  const r = n(e);
-  return (t) => r(t) ? { valid: !0 } : {
+const s = (e) => {
+  const t = n(e);
+  return (r) => t(r) ? { valid: !0 } : {
     valid: !1,
     reason: "regex",
-    value: t
+    value: r
   };
-}, n = (e) => (r) => e.test(r);
+}, n = (e) => {
+  if (typeof e == "string") {
+    const t = new RegExp(e);
+    return (r) => t.test(r);
+  } else
+    return (t) => e.test(t);
+};
 export {
-  a as getRegexPredictor
+  s as getRegexPredictor
 };

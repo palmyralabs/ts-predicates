@@ -15,7 +15,7 @@ interface IValidatorOptions {
     required?: boolean;
     range?: IRangeOptions<number>;
     length?: ILengthOptions;
-    regExp?: RegExp;
+    regExp?: RegExp | string;
     rules?: string[];
 }
 interface PredicateResponse {

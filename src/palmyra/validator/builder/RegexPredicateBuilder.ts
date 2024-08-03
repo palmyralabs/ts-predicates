@@ -1,7 +1,6 @@
 import { PredicateGen, PredicateResponse } from '../types';
 
-
-const getRegexPredictor: PredicateGen = (regex: string) => {
+const getRegexPredictor: PredicateGen = (regex: string | RegExp) => {
     const regExp = getRegexValidator(regex);
 
     return (d: any): PredicateResponse => {
@@ -15,9 +14,12 @@ const getRegexPredictor: PredicateGen = (regex: string) => {
     }
 }
 
-
-const getRegexValidator = (regex) => {
-    return (value: any) => { return regex.test(value) }
+const getRegexValidator = (regex: string | RegExp) => {
+    if (typeof regex == 'string') {
+        const regExp = new RegExp(regex);
+        return (value: any) => { return regExp.test(value) }
+    } else
+        return (value: any) => { return regex.test(value) }
 }
 
 export { getRegexPredictor }
