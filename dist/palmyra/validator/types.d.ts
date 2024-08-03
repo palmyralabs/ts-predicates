@@ -1,3 +1,5 @@
+import { validationRule } from './builder/RulePredicateBuilder';
+
 interface ILengthOptions {
     min?: number;
     max?: number;
@@ -16,7 +18,7 @@ interface IValidatorOptions {
     range?: IRangeOptions<number>;
     length?: ILengthOptions;
     regExp?: RegExp | string;
-    rules?: string[];
+    rules?: validationRule[];
 }
 interface PredicateResponse {
     valid: boolean;
