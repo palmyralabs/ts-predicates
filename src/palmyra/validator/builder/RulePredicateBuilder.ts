@@ -10,7 +10,6 @@ const ruleValidators = {
     'time': validator.isTime,
     'number': isNumeric,
     'email': validator.isEmail,
-    'mobilePhone': validator.isMobilePhone,
     'port': validator.isPort,
     'ip': validator.isIP,
     'fqdn': validator.isFQDN,

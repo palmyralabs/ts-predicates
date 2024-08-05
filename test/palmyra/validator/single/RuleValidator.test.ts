@@ -15,12 +15,11 @@ test('rule failure', () => {
 })
 
 test('rule success', () => {
-    const v = getPredicate({ rules: ["mobilePhone"] });
+    const v = getPredicate({ rules: ["number"] });
     expect(v("9877505644")).toEqual({ valid: true });
     expect(v("75132000")).toEqual({ valid: true });
-    expect(v("98775")).toEqual({ valid: false, reason: "mobilePhone", value: "98775" });
-    expect(v("98765-09821")).toEqual({ valid: false, reason: "mobilePhone", value: "98765-09821" });
-    expect(v("mnbjhgbjhb")).toEqual({ valid: false, reason: "mobilePhone", value: "mnbjhgbjhb" });
+    expect(v("98765-09821")).toEqual({ valid: false, reason: "number", value: "98765-09821" });
+    expect(v("mnbjhgbjhb")).toEqual({ valid: false, reason: "number", value: "mnbjhgbjhb" });
 })
 
 test('rule success', () => {
