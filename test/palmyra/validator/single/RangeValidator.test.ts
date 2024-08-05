@@ -31,3 +31,23 @@ test('range start-end-success', () => {
     expect(v(1098)).toEqual({ valid: true });
     expect(v(1001)).toEqual({ valid: true });
 })
+
+test('input-undefined', () => {
+    const v = getPredicate({ range: { start: 8 } });
+    expect(v(undefined)).toEqual({ valid: true });
+})
+
+test('input-null', () => {
+    const v = getPredicate({ range: { start: 8 } });
+    expect(v(null)).toEqual({ valid: true });
+})
+
+test('input-required-undefined', () => {
+    const v = getPredicate({ range: { start: 8 }, required: true });
+    expect(v(undefined)).toEqual({ valid: false, reason: "required", value: undefined });
+})
+
+test('input-required-null', () => {
+    const v = getPredicate({ range: { start: 8 }, required: true });
+    expect(v(null)).toEqual({ valid: false, reason: "required", value: null });
+})
