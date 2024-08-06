@@ -1,24 +1,31 @@
-import validator, { isFloat, isNumeric } from 'validator';
+import isAlpha from 'validator/es/lib/isAlpha';
+import isDate from 'validator/es/lib/isDate';
+import isTime from 'validator/es/lib/isTime';
+import isEmail from 'validator/es/lib/isEmail';
+import isPort from 'validator/es/lib/isPort';
+import isFQDN from 'validator/es/lib/isFQDN';
+import isIP from 'validator/es/lib/isIP';
+
+
 import { PredicateGen, PredicateResponse } from '../types';
-import { hasLowerCase, hasSpecialChar, hasUpperCase, isFolder, isPortRange, noopPredicate } from '../predicate';
+import {
+    isFloat, isFolder, isNumeric, isPortRange, noopPredicate
+} from '../predicate';
 
 
 const ruleValidators = {
     'string': noopPredicate,
-    'alphabets': validator.isAlpha,
-    'date': validator.isDate,
-    'time': validator.isTime,
+    'alphabets': isAlpha,
+    'date': isDate,
+    'time': isTime,
     'number': isNumeric,
-    'email': validator.isEmail,
-    'port': validator.isPort,
-    'ip': validator.isIP,
-    'fqdn': validator.isFQDN,
+    'email': isEmail,
+    'port': isPort,
+    'ipv4': (v: string) => isIP(v, 4),
+    'ipv6': (v: string) => isIP(v, 6),
+    'fqdn': isFQDN,
     'folder': isFolder,
     'portRange': isPortRange,
-    'password': validator.isStrongPassword,
-    'hasLowerCase': hasLowerCase,
-    'hasUpperCase': hasUpperCase,
-    'hasSpecialChar': hasSpecialChar,
     'float': isFloat
 }
 

@@ -1,4 +1,5 @@
-import validator from "validator";
+import libIsNumeric from 'validator/es/lib/isNumeric';
+import libIsFloat from 'validator/es/lib/isFloat';
 
 const isEmpty = (data: any) => {
     if (null == data || undefined == data)
@@ -40,12 +41,12 @@ const noopPredicate = () => {
 
 const isNumeric = (val: any) => {
     const v = (typeof val == "number" ? val.toString() : val)
-    return validator.isNumeric(v);
+    return libIsNumeric(v);
 }
 
 const isFloat = (val: any) => {
     const v = (typeof val == "number" ? val.toString() : val)
-    return validator.isFloat(v);
+    return libIsFloat(v);
 }
 
 export { isEmpty, isPresent, hasValue, noopPredicate, isNumeric, isFloat }

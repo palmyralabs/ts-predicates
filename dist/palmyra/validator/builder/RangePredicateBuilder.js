@@ -17,7 +17,7 @@ const l = (t) => {
     } else
       return { valid: !1, reason: "range.end", value: r };
   else
-    return { valid: !1, reason: "range.start", value: r };
+    return { valid: !1, reason: "range.end", value: r };
 }, a = (t) => (e) => e <= t ? { valid: !0 } : { valid: !1, reason: "range.end", value: e }, s = (t) => (e) => t <= e ? { valid: !0 } : { valid: !1, reason: "range.start", value: e };
 export {
   l as getRangeValidator
