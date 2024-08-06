@@ -30,7 +30,7 @@ const getRulePredicator: PredicateGen = (rule: validationRule) => {
     const validator = getRuleValidator(rule);
 
     return (d: any): PredicateResponse => {
-        if (validator(d)) {
+        if (null != d && validator(d)) {
             return { valid: true }
         } else {
             return {

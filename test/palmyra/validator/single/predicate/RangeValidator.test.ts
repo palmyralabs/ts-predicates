@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { getPredicate } from '../../../../src/palmyra/validator/DataValidator';
+import { getPredicate } from '../../../../../src/palmyra/validator/DataValidator';
 
 test('range start-success', () => {
     const actual = getPredicate({ range: { start: 10 } })(10);

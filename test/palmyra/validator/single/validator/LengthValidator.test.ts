@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { getLengthValidator } from '../../../src/palmyra/validator/builder/LengthPredicateBuilder';
+import { getLengthValidator } from '../../../../../src/palmyra/validator/builder/LengthPredicateBuilder';
 
 test('length equal-success', () => {
     const actual = getLengthValidator({ is: 8 })('hellostr');
@@ -48,4 +48,14 @@ test('length maximum-failure-Less', () => {
 test('length maximum-failure-greater', () => {
     const v = getLengthValidator({ max: 8 });
     expect(v('hello world')).toEqual({ valid: false, reason: "length.max", value: 11 });
+})
+
+test('length input-undefined', () => {
+    const v = getLengthValidator({ max: 8 });
+    expect(v(undefined)).toEqual({ valid: false, reason: "length.invalid", value: undefined });
+})
+
+test('length input-null', () => {
+    const v = getLengthValidator({ max: 8 });
+    expect(v(null)).toEqual({ valid: false, reason: "length.invalid", value: null });
 })

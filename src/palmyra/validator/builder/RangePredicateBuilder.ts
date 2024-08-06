@@ -36,7 +36,7 @@ const getStartAndEndRangeValidator: PredicateGen = (startRange: number, endRange
                 return { valid: false, reason: 'range.end', value: val };
             }
         } else {
-            return { valid: false, reason: 'range.start', value: val };
+            return { valid: false, reason: 'range.end', value: val };
         }
     }
 }

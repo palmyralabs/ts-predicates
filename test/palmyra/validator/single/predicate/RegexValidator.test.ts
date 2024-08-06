@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { getPredicate } from '../../../../src/palmyra/validator/DataValidator';
+import { getPredicate } from '../../../../../src/palmyra/validator/DataValidator';
 
 test('regex success', () => {
     const actual = getPredicate({ regExp: /^[a-zA-Z]+$/ })("Example");

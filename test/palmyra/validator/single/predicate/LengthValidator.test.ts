@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { getPredicate } from '../../../../src/palmyra/validator/DataValidator';
+import { getPredicate } from '../../../../../src/palmyra/validator/DataValidator';
 
 test('length equal-success', () => {
     const actual = getPredicate({ length: { is: 8 } })('hellostr');

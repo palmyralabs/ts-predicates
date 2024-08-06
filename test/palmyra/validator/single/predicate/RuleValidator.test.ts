@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { getPredicate } from '../../../../src/palmyra/validator/DataValidator';
+import { getPredicate } from '../../../../../src/palmyra/validator/DataValidator';
 
 test('rule success', () => {
     const actual = getPredicate({ rules: ["email"] })("example@gmail.com");
