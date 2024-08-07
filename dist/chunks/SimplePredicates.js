@@ -79,10 +79,10 @@ n["pt-BR"] = n["pt-PT"];
 t["pl-Pl"] = t["pl-PL"];
 n["pl-Pl"] = n["pl-PL"];
 t["fa-AF"] = t.fa;
-function N(r, e) {
+function P(r, e) {
   return R(r), new RegExp("^[+-]?([0-9]*[".concat({}.locale ? n[e.locale] : ".", "])?[0-9]+$")).test(r);
 }
-function P(r, e) {
+function I(r, e) {
   R(r), e = e || {};
   var a = new RegExp("^(?:[-+])?(?:[0-9]+)?(?:\\".concat(e.locale ? n[e.locale] : ".", "[0-9]*)?(?:[eE][\\+\\-]?(?:[0-9]+))?$"));
   if (r === "" || r === "." || r === "," || r === "-" || r === "+")
@@ -90,20 +90,20 @@ function P(r, e) {
   var i = parseFloat(r.replace(",", "."));
   return a.test(r) && (!e.hasOwnProperty("min") || i >= e.min) && (!e.hasOwnProperty("max") || i <= e.max) && (!e.hasOwnProperty("lt") || i < e.lt) && (!e.hasOwnProperty("gt") || i > e.gt);
 }
-const E = (r) => r == null || r == null ? !0 : typeof r == "string" ? r.length == 0 : isNaN(r) ? !0 : r instanceof Array ? r.length == 0 : typeof r == "object" ? Object.keys(r).length == 0 : !1, I = (r) => !E(r), L = (r, e) => Object.keys(r).find((i) => i == e) == null ? !1 : !E(r[e]), D = () => !0, U = (r) => {
-  const e = typeof r == "number" ? r.toString() : r;
-  return N(e);
-}, k = (r) => {
+const E = (r) => r == null || r == null ? !0 : typeof r == "string" || r instanceof Array ? r.length == 0 : typeof r == "object" ? Object.keys(r).length == 0 : !1, L = (r) => !E(r), N = (r, e) => Object.keys(r).find((i) => i == e) == null ? !1 : !E(r[e]), D = () => !0, U = (r) => {
   const e = typeof r == "number" ? r.toString() : r;
   return P(e);
+}, k = (r) => {
+  const e = typeof r == "number" ? r.toString() : r;
+  return I(e);
 };
 export {
-  I as a,
+  L as a,
   U as b,
   k as c,
   R as d,
   t as e,
-  L as h,
+  N as h,
   E as i,
   D as n
 };

@@ -7,13 +7,9 @@ const isEmpty = (data: any) => {
     if (typeof (data) == 'string') {
         return (data.length == 0);
     }
-    if (isNaN(data))
-        return true;
-
     if (data instanceof Array) {
         return data.length == 0;
     }
-
     if (typeof data == 'object') {
         return Object.keys(data).length == 0;
     }

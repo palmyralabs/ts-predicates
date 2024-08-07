@@ -1,6 +1,6 @@
 {
   "name": "@palmyralabs/ts-predicates",
-  "private": true,
+  "private": false,
   "version": "0.2.0",
   "type": "module",
   "main": "dist/main.js",
