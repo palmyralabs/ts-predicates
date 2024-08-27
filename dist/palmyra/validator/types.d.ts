@@ -13,16 +13,18 @@ interface IRangeOptions<T> {
 }
 type Predicator = (v: string | number) => PredicateResponse;
 type PredicateGen = (...args: any[]) => Predicator;
-interface IValidatorOptions {
+interface IValidatorOptions extends IConstraints {
+    regExp?: RegExp | string;
+    rules?: validationRule[];
+}
+interface IConstraints {
     required?: boolean;
     range?: IRangeOptions<number>;
     length?: ILengthOptions;
-    regExp?: RegExp | string;
-    rules?: validationRule[];
 }
 interface PredicateResponse {
     valid: boolean;
     reason?: string;
     value?: any;
 }
-export type { IValidatorOptions, ILengthOptions, PredicateResponse, PredicateGen, Predicator, IRangeOptions };
+export type { IValidatorOptions, IConstraints, ILengthOptions, PredicateResponse, PredicateGen, Predicator, IRangeOptions };
