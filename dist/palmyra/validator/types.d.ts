@@ -1,5 +1,4 @@
 import { validationRule } from './builder/RulePredicateBuilder';
-
 interface ILengthOptions {
     min?: number;
     max?: number;

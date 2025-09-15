@@ -1,17 +1,6 @@
-function S(r) {
-  "@babel/helpers - typeof";
-  return S = typeof Symbol == "function" && typeof Symbol.iterator == "symbol" ? function(e) {
-    return typeof e;
-  } : function(e) {
-    return e && typeof Symbol == "function" && e.constructor === Symbol && e !== Symbol.prototype ? "symbol" : typeof e;
-  }, S(r);
-}
-function R(r) {
-  var e = typeof r == "string" || r instanceof String;
-  if (!e) {
-    var a = S(r);
-    throw r === null ? a = "null" : a === "object" && (a = r.constructor.name), new TypeError("Expected a string but received a ".concat(a));
-  }
+function b(r) {
+  if (r == null) throw new TypeError("Expected a string but received a ".concat(r));
+  if (r.constructor.name !== "String") throw new TypeError("Expected a string but received a ".concat(r.constructor.name));
 }
 var t = {
   "en-US": /^[A-Z]+$/i,
@@ -56,54 +45,58 @@ var t = {
 }, n = {
   "en-US": ".",
   ar: "٫"
-}, b = ["AU", "GB", "HK", "IN", "NZ", "ZA", "ZM"];
-for (var u, o = 0; o < b.length; o++)
-  u = "en-".concat(b[o]), t[u] = t["en-US"], n[u] = n["en-US"];
-var g = ["AE", "BH", "DZ", "EG", "IQ", "JO", "KW", "LB", "LY", "MA", "QM", "QA", "SA", "SD", "SY", "TN", "YE"];
-for (var c, f = 0; f < g.length; f++)
-  c = "ar-".concat(g[f]), t[c] = t.ar, n[c] = n.ar;
-var h = ["IR", "AF"];
-for (var y, s = 0; s < h.length; s++)
-  y = "fa-".concat(h[s]), n[y] = n.ar;
-var p = ["BD", "IN"];
-for (var l, $ = 0; $ < p.length; $++)
-  l = "bn-".concat(p[$]), t[l] = t.bn, n[l] = n["en-US"];
-var m = ["ar-EG", "ar-LB", "ar-LY"], v = ["bg-BG", "cs-CZ", "da-DK", "de-DE", "el-GR", "en-ZM", "eo", "es-ES", "fr-CA", "fr-FR", "id-ID", "it-IT", "ku-IQ", "hi-IN", "hu-HU", "nb-NO", "nn-NO", "nl-NL", "pl-PL", "pt-PT", "ru-RU", "kk-KZ", "si-LK", "sl-SI", "sr-RS@latin", "sr-RS", "sv-SE", "tr-TR", "uk-UA", "vi-VN"];
-for (var A = 0; A < m.length; A++)
-  n[m[A]] = n["en-US"];
-for (var Z = 0; Z < v.length; Z++)
-  n[v[Z]] = ",";
+}, h = ["AU", "GB", "HK", "IN", "NZ", "ZA", "ZM"];
+for (var u, c = 0; c < h.length; c++)
+  u = "en-".concat(h[c]), t[u] = t["en-US"], n[u] = n["en-US"];
+var S = ["AE", "BH", "DZ", "EG", "IQ", "JO", "KW", "LB", "LY", "MA", "QM", "QA", "SA", "SD", "SY", "TN", "YE"];
+for (var s, l = 0; l < S.length; l++)
+  s = "ar-".concat(S[l]), t[s] = t.ar, n[s] = n.ar;
+var v = ["IR", "AF"];
+for (var R, f = 0; f < v.length; f++)
+  R = "fa-".concat(v[f]), n[R] = n.ar;
+var E = ["BD", "IN"];
+for (var $, A = 0; A < E.length; A++)
+  $ = "bn-".concat(E[A]), t[$] = t.bn, n[$] = n["en-US"];
+var m = ["ar-EG", "ar-LB", "ar-LY"], P = ["bg-BG", "cs-CZ", "da-DK", "de-DE", "el-GR", "en-ZM", "eo", "es-ES", "fr-CA", "fr-FR", "id-ID", "it-IT", "ku-IQ", "hi-IN", "hu-HU", "nb-NO", "nn-NO", "nl-NL", "pl-PL", "pt-PT", "ru-RU", "kk-KZ", "si-LK", "sl-SI", "sr-RS@latin", "sr-RS", "sv-SE", "tr-TR", "uk-UA", "vi-VN"];
+for (var o = 0; o < m.length; o++)
+  n[m[o]] = n["en-US"];
+for (var Z = 0; Z < P.length; Z++)
+  n[P[Z]] = ",";
 t["fr-CA"] = t["fr-FR"];
 t["pt-BR"] = t["pt-PT"];
 n["pt-BR"] = n["pt-PT"];
 t["pl-Pl"] = t["pl-PL"];
 n["pl-Pl"] = n["pl-PL"];
 t["fa-AF"] = t.fa;
-function P(r, e) {
-  return R(r), new RegExp("^[+-]?([0-9]*[".concat({}.locale ? n[e.locale] : ".", "])?[0-9]+$")).test(r);
+function i(r) {
+  return r == null;
 }
-function I(r, e) {
-  R(r), e = e || {};
-  var a = new RegExp("^(?:[-+])?(?:[0-9]+)?(?:\\".concat(e.locale ? n[e.locale] : ".", "[0-9]*)?(?:[eE][\\+\\-]?(?:[0-9]+))?$"));
+function N(r, e) {
+  return b(r), new RegExp("^[+-]?([0-9]*[".concat({}.locale ? n[e.locale] : ".", "])?[0-9]+$")).test(r);
+}
+function L(r, e) {
+  b(r), e = e || {};
+  var g = new RegExp("^(?:[-+])?(?:[0-9]+)?(?:\\".concat(e.locale ? n[e.locale] : ".", "[0-9]*)?(?:[eE][\\+\\-]?(?:[0-9]+))?$"));
   if (r === "" || r === "." || r === "," || r === "-" || r === "+")
     return !1;
-  var i = parseFloat(r.replace(",", "."));
-  return a.test(r) && (!e.hasOwnProperty("min") || i >= e.min) && (!e.hasOwnProperty("max") || i <= e.max) && (!e.hasOwnProperty("lt") || i < e.lt) && (!e.hasOwnProperty("gt") || i > e.gt);
+  var a = parseFloat(r.replace(",", "."));
+  return g.test(r) && (!e.hasOwnProperty("min") || i(e.min) || a >= e.min) && (!e.hasOwnProperty("max") || i(e.max) || a <= e.max) && (!e.hasOwnProperty("lt") || i(e.lt) || a < e.lt) && (!e.hasOwnProperty("gt") || i(e.gt) || a > e.gt);
 }
-const E = (r) => r == null || r == null ? !0 : typeof r == "string" || r instanceof Array ? r.length == 0 : typeof r == "object" ? Object.keys(r).length == 0 : !1, L = (r) => !E(r), N = (r, e) => Object.keys(r).find((i) => i == e) == null ? !1 : !E(r[e]), D = () => !0, U = (r) => {
+const I = (r) => r == null || r == null ? !0 : typeof r == "string" || r instanceof Array ? r.length == 0 : typeof r == "object" ? Object.keys(r).length == 0 : !1, U = (r) => !I(r), d = (r, e) => Object.keys(r).find((a) => a == e) == null ? !1 : !I(r[e]), D = () => !0, k = (r) => {
   const e = typeof r == "number" ? r.toString() : r;
-  return P(e);
-}, k = (r) => {
+  return N(e);
+}, p = (r) => {
   const e = typeof r == "number" ? r.toString() : r;
-  return I(e);
+  return L(e);
 };
 export {
-  L as a,
-  U as b,
-  k as c,
-  R as d,
+  U as a,
+  k as b,
+  p as c,
+  b as d,
   t as e,
-  N as h,
-  E as i,
+  i as f,
+  d as h,
+  I as i,
   D as n
 };

@@ -5,7 +5,6 @@ import { default as isEmail } from 'validator/es/lib/isEmail';
 import { default as isPort } from 'validator/es/lib/isPort';
 import { default as isFQDN } from 'validator/es/lib/isFQDN';
 import { PredicateGen } from '../types';
-
 declare const ruleValidators: {
     string: () => boolean;
     alphabets: typeof isAlpha;
